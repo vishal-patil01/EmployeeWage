@@ -9,10 +9,11 @@ readonly FULL_TIME=8
 
 #! Declaring Variable
 day=0
-hours=0
+
 
 #! functin to  get Working Hour Of Employee
 function getWorkHours() {
+	local hours=0
 	emp_Check=$((RANDOM % 2))
 	case $emp_Check in
 			0)

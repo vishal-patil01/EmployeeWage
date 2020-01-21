@@ -9,15 +9,17 @@ readonly PART_TIME=4
 readonly FULL_TIME=8
 
 #! Calculating Wage On Employee Type
-if [ $EMP_CHECK -eq 0 ]
-then
-	echo "Employee Present"
-	echo "Daily Wage = $((RATE_PER_HOUR * FULL_TIME)) "
-elif [ $EMP_CHECK -eq 1 ]
-then
-	echo "Part Time Employee"
-	echo "Daily Wage = $((RATE_PER_HOUR * PART_TIME))"
-else
-	echo "Employee Absent"
-	echo "Daily Wage = 0"
-fi
+case $EMP_CHECK in
+	0)
+		echo "Employee Present"
+		echo "Daily Wage = $((RATE_PER_HOUR * FULL_TIME)) "
+		;;
+	1)
+		echo "Part Time Employee"
+		echo "Daily Wage = $((RATE_PER_HOUR * PART_TIME))"
+		;;
+	2)
+		echo "Employee Absent"
+		echo "Daily Wage = 0"
+		;;
+esac

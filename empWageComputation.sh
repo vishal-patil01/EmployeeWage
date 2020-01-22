@@ -9,6 +9,7 @@ readonly FULL_TIME=8
 
 #! Declaring Variable
 day=1
+declare -A dailySalary
 
 #! functin to  get Working Hour Of Employee
 function getWorkHours() {
@@ -30,15 +31,16 @@ function getDailyWage() {
 	echo $((RATE_PER_HOUR * hoursInDay))
 }
 
-#! Calculating Monthly Wage 
+#! Calculating Monthly Wage And Storing in Dictionary 
 while [[ $day -le 20 && $totalHours -lt 100 ]]
 do
 		 workHour=$(getWorkHours)
 		totalHours=$((totalHours + workHour))
-		dailySalary[day]=$(getDailyWage $workHour)
-		totalSalary=$((totalSalary + ${dailySalary[$day]}))
-		echo -e "day $day salary ${dailySalary[$day]} \n"
+		dailySalary["Day "$day]=$(getDailyWage $workHour)
+		totalSalary=$((totalSalary + ${dailySalary["Day "$day]}))
 		((day++))
 done
-echo "Day Wise Salary = ${dailySalary[@]}"
-echo "Employee Monthly salary = $totalSalary"
+echo "Days = ${!dailySalary[@]}"
+echo "Salary = ${dailySalary[@]}"
+
+echo "Employee Total Monthly salary = $totalSalary"

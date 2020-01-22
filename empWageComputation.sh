@@ -8,7 +8,7 @@ readonly PART_TIME=4
 readonly FULL_TIME=8
 
 #! Declaring Variable
-day=0
+day=1
 
 #! functin to  get Working Hour Of Employee
 function getWorkHours() {
@@ -31,7 +31,7 @@ function getDailyWage() {
 }
 
 #! Calculating Monthly Wage 
-while [[ $day -lt 20 && $totalHours -lt 100 ]]
+while [[ $day -le 20 && $totalHours -lt 100 ]]
 do
 		 workHour=$(getWorkHours)
 		totalHours=$((totalHours + workHour))

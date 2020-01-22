@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash  
 
 echo -e "Welcome To EmployeeWage"
 
@@ -9,7 +9,6 @@ readonly FULL_TIME=8
 
 #! Declaring Variable
 day=0
-
 
 #! functin to  get Working Hour Of Employee
 function getWorkHours() {
@@ -22,21 +21,24 @@ function getWorkHours() {
 			1)
 				hours=$PART_TIME
 				;;
-			*)
-				hours=0
-				;;
 	esac
 	echo $hours
 }
+#! calculate Daily Wage
+function getDailyWage() {
+	local hoursInDay=$1
+	echo $((RATE_PER_HOUR * hoursInDay))
+}
 
-#! Calculating Monthly Wage On Employee Type
+#! Calculating Monthly Wage 
 while [[ $day -lt 20 && $totalHours -lt 100 ]]
 do
-	totalHours=$((totalHours + $(getWorkHours)))
-	if [ $(getWorkHours) -ne 0 ]
-	then
+		 workHour=$(getWorkHours)
+		totalHours=$((totalHours + workHour))
+		dailySalary[day]=$(getDailyWage $workHour)
+		totalSalary=$((totalSalary + ${dailySalary[$day]}))
+		echo -e "day $day salary ${dailySalary[$day]} \n"
 		((day++))
-	fi
 done
-
-echo "Employee Monthly salary = $((RATE_PER_HOUR * totalHours))"
+echo "Day Wise Salary = ${dailySalary[@]}"
+echo "Employee Monthly salary = $totalSalary"
